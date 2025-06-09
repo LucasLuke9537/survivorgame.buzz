@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epic Adventure Quest - Play Free Online Game</title>
+    <meta name="description" content="Experience the ultimate online adventure game with stunning graphics and immersive gameplay. Play Epic Adventure Quest free in your browser now!">
+    <meta name="keywords" content="online game, adventure game, free game, browser game, epic quest">
+    <link rel="canonical" href="https://example.com/epic-adventure-quest">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Epic Adventure Quest - Play Free Online Game">
+    <meta property="og:description" content="Experience the ultimate online adventure game with stunning graphics and immersive gameplay.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/epic-adventure-quest">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'apple-blue': '#007AFF',
+                        'apple-green': '#34C759',
+                        'apple-indigo': '#5856D6',
+                        'apple-orange': '#FF9500',
+                        'apple-pink': '#FF2D92',
+                        'apple-purple': '#AF52DE',
+                        'apple-red': '#FF3B30',
+                        'apple-teal': '#5AC8FA',
+                        'apple-yellow': '#FFCC00',
+                        'apple-gray': '#8E8E93',
+                        'apple-gray2': '#AEAEB2',
+                        'apple-gray3': '#C7C7CC',
+                        'apple-gray4': '#D1D1D6',
+                        'apple-gray5': '#E5E5EA',
+                        'apple-gray6': '#F2F2F7'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #007AFF 0%, #5856D6 50%, #AF52DE 100%);
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .game-card {
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 122, 255, 0.3);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-apple-gray6 via-white to-apple-gray5 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg shadow-2xl">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                        <span class="text-2xl">🎮</span>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-white">Epic Adventure Quest</h1>
+                </div>
+                <button class="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition-all duration-300">
+                    Play Now
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-12 md:py-20">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight">
+                Epic Adventure Quest
+            </h1>
+            <p class="text-xl md:text-2xl text-apple-gray mb-8 max-w-3xl mx-auto">
+                Embark on an extraordinary journey through mystical realms and discover hidden treasures in this immersive online adventure game.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-apple-blue hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 pulse-animation">
+                    Start Your Quest
+                </button>
+                <button class="bg-white hover:bg-apple-gray6 text-apple-blue border border-apple-blue px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300">
+                    Watch Trailer
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Container -->
+    <section class="container mx-auto px-4 mb-16">
+        <div class="game-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div class="p-6 md:p-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Play Now</h2>
+                <p class="text-apple-gray mb-6">Experience the game directly in your browser - no downloads required!</p>
+                
+                <!-- Game iframe placeholder -->
+                <div class="relative w-full" style="padding-bottom: 56.25%; /* 16:9 aspect ratio */">
+                    <iframe 
+                        src="vampire-survivor-game.html" 
+                        class="absolute top-0 left-0 w-full h-full rounded-2xl border-4 border-apple-gray5"
+                        frameborder="0" 
+                        allowfullscreen
+                        title="Epic Adventure Quest - Vampire Survivor Game">
+                        <p>Your browser doesn't support iframes. Please <a href="vampire-survivor-game.html" class="text-apple-blue hover:underline">click here to play the game</a>.</p>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Features -->
+    <section class="container mx-auto px-4 mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Game Features</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass-effect rounded-2xl p-6 text-center">
+                <div class="w-16 h-16 bg-apple-green rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">⚔️</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Epic Battles</h3>
+                <p class="text-apple-gray">Engage in thrilling combat with mythical creatures and powerful bosses using an advanced combat system.</p>
+            </div>
+            
+            <div class="glass-effect rounded-2xl p-6 text-center">
+                <div class="w-16 h-16 bg-apple-purple rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">🏰</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Vast Worlds</h3>
+                <p class="text-apple-gray">Explore stunning landscapes, from ancient forests to magical kingdoms, each with unique secrets to discover.</p>
+            </div>
+            
+            <div class="glass-effect rounded-2xl p-6 text-center">
+                <div class="w-16 h-16 bg-apple-orange rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">💎</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Treasure Hunting</h3>
+                <p class="text-apple-gray">Collect rare artifacts, magical weapons, and precious gems to enhance your character's abilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Overview -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">About Epic Adventure Quest</h2>
+                
+                <div class="prose prose-lg max-w-none text-apple-gray space-y-6">
+                    <p class="text-xl leading-relaxed">
+                        Epic Adventure Quest is a revolutionary browser-based MMORPG that combines classic adventure elements with modern gameplay mechanics. Set in the mystical realm of Aetheria, players embark on an epic journey to restore balance to a world torn apart by ancient magic.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800">Gameplay Overview</h3>
+                    <p>
+                        The game features an innovative real-time combat system where strategy and skill determine victory. Players can choose from five unique character classes, each with distinctive abilities and playstyles. Whether you prefer the brute force of a Warrior, the mystical powers of a Mage, or the stealth tactics of a Rogue, there's a perfect fit for every gaming preference.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800">Character Progression</h3>
+                    <p>
+                        Experience a deep character customization system with over 100 skills to master and countless equipment combinations. As you progress through the game, unlock powerful abilities, craft legendary weapons, and discover rare magical items that will aid you in your quest.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800">Multiplayer Features</h3>
+                    <p>
+                        Join forces with players from around the world in guild systems, participate in massive PvP battles, or tackle challenging dungeon raids that require teamwork and coordination. The game's social features ensure you'll never adventure alone.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800">Technical Specifications</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Platform:</strong> Browser-based (Chrome, Firefox, Safari, Edge)</li>
+                        <li><strong>Requirements:</strong> Minimum 4GB RAM, modern graphics card</li>
+                        <li><strong>Internet:</strong> Stable broadband connection required</li>
+                        <li><strong>Storage:</strong> No download required - plays directly in browser</li>
+                        <li><strong>Mobile Support:</strong> Optimized for tablets and smartphones</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="gradient-bg py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready for Adventure?</h2>
+            <p class="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+                Join millions of players worldwide and begin your legendary quest today. No registration required - jump straight into the action!
+            </p>
+            <button class="bg-white hover:bg-apple-gray6 text-apple-blue px-12 py-4 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105">
+                Play Epic Adventure Quest Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Game</h4>
+                    <ul class="space-y-2 text-apple-gray2">
+                        <li><a href="#" class="hover:text-white transition-colors">How to Play</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Game Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Character Classes</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">System Requirements</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Community</h4>
+                    <ul class="space-y-2 text-apple-gray2">
+                        <li><a href="#" class="hover:text-white transition-colors">Forums</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Discord</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Reddit</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Facebook</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Support</h4>
+                    <ul class="space-y-2 text-apple-gray2">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Bug Reports</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-apple-gray2 hover:text-white transition-colors">
+                            <span class="text-2xl">📘</span>
+                        </a>
+                        <a href="#" class="text-apple-gray2 hover:text-white transition-colors">
+                            <span class="text-2xl">🐦</span>
+                        </a>
+                        <a href="#" class="text-apple-gray2 hover:text-white transition-colors">
+                            <span class="text-2xl">📷</span>
+                        </a>
+                        <a href="#" class="text-apple-gray2 hover:text-white transition-colors">
+                            <span class="text-2xl">🎬</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-apple-gray2">
+                <p>&copy; 2024 Epic Adventure Quest. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.game-card, .glass-effect');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
