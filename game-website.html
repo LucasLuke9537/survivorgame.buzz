@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epic Adventure Quest - Play Free Online Game</title>
+    <meta name="description" content="Experience the ultimate online adventure game with stunning graphics and immersive gameplay. Play Epic Adventure Quest free in your browser now!">
+    <meta name="keywords" content="online game, adventure game, free game, browser game, epic quest">
+    <link rel="canonical" href="https://example.com/epic-adventure-quest">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Epic Adventure Quest - Play Free Online Game">
+    <meta property="og:description" content="Experience the ultimate online adventure game with stunning graphics and immersive gameplay.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/epic-adventure-quest">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'apple-blue': '#007AFF',
+                        'apple-green': '#34C759',
+                        'apple-indigo': '#5856D6',
+                        'apple-orange': '#FF9500',
+                        'apple-pink': '#FF2D92',
+                        'apple-purple': '#AF52DE',
+                        'apple-red': '#FF3B30',
+                        'apple-teal': '#5AC8FA',
+                        'apple-yellow': '#FFCC00',
+                        'apple-gray': '#8E8E93',
+                        'apple-gray2': '#AEAEB2',
+                        'apple-gray3': '#C7C7CC',
+                        'apple-gray4': '#D1D1D6',
+                        'apple-gray5': '#E5E5EA',
+                        'apple-gray6': '#F2F2F7'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #007AFF 0%, #5856D6 50%, #AF52DE 100%);
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .game-card {
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 122, 255, 0.3);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* 游戏相关样式 */
+        .game-wrapper-integrated {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .game-main-integrated {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .game-container-integrated {
+            flex: 1;
+            min-width: 300px;
+            height: 100%;
+            background: linear-gradient(45deg, #2c1810, #1a0f0a);
+            border: 2px solid #8B4513;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-side-panels-integrated {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-width: 200px;
+            max-width: 250px;
+        }
+        
+        @media (max-width: 768px) {
+            .game-main-integrated {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .game-side-panels-integrated {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                width: 100%;
+                min-width: auto;
+                max-width: none;
+            }
+        }
+        
+        #gameCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 13px;
+        }
+        
+        .ui-element-integrated {
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            pointer-events: auto;
+        }
+        
+        #healthBar, #expBar {
+            width: 180px;
+            height: 16px;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        
+        #healthFill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4444, #ff6666);
+            transition: width 0.3s;
+        }
+        
+        #expFill {
+            height: 100%;
+            background: linear-gradient(90deg, #4444ff, #6666ff);
+            transition: width 0.3s;
+        }
+        
+        .weapon-slot {
+            width: 35px;
+            height: 35px;
+            border: 2px solid #666;
+            border-radius: 5px;
+            margin: 2px;
+            display: inline-block;
+            background: rgba(100,100,100,0.3);
+            text-align: center;
+            line-height: 31px;
+            font-size: 12px;
+        }
+        
+        .weapon-slot.active {
+            border-color: #ffcc00;
+            background: rgba(255,204,0,0.3);
+        }
+        
+        #levelUpModal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.95);
+            border: 3px solid #ffcc00;
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            display: none;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 30px rgba(255,204,0,0.5);
+            z-index: 1000;
+        }
+        
+        .slow-motion-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,204,0,0.9);
+            color: black;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .upgrade-option {
+            background: linear-gradient(135deg, rgba(100,100,100,0.3), rgba(150,150,150,0.2));
+            border: 2px solid #666;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: scale(1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            min-width: 150px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upgrade-option:hover {
+            border-color: #ffcc00;
+            background: linear-gradient(135deg, rgba(255,204,0,0.3), rgba(255,204,0,0.2));
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255,204,0,0.4);
+        }
+        
+        .upgrade-option h3 {
+            margin: 0 0 8px 0;
+            color: #ffcc00;
+            font-size: 16px;
+        }
+        
+        .upgrade-option p {
+            margin: 0;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        #gameOver {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.95);
+            border: 3px solid #ff4444;
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            text-align: center;
+            display: none;
+            z-index: 1000;
+        }
+        
+        #startScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(20,10,5,0.95));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            border-radius: 13px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+        
+        .start-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 
+                         0 0 20px rgba(255,215,0,0.6);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .start-subtitle {
+            font-size: 16px;
+            color: #CD853F;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .start-button {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+            margin-top: 15px;
+        }
+        
+        .start-button:hover {
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.6);
+        }
+        
+        .external-ui-integrated {
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #8B4513;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .external-ui-integrated h3 {
+            margin: 0 0 8px 0;
+            color: #FFD700;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .external-ui-integrated div {
+            font-size: 12px;
+            margin: 3px 0;
+        }
+        
+        #gameUI {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        #gameUI .ui-element-integrated {
+            pointer-events: auto;
+        }
+        
+        button {
+            background: #ffcc00;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #ffd700;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-apple-gray6 via-white to-apple-gray5 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg shadow-2xl">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                        <span class="text-2xl">🎮</span>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-white">Epic Adventure Quest</h1>
+                </div>
+                <button class="bg-white/20 hover:bg-white/30 text-white px-6 py-2 rounded-full transition-all duration-300">
+                    Play Now
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-12 md:py-20">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight">
+                Epic Adventure Quest
+            </h1>
+            <p class="text-xl md:text-2xl text-apple-gray mb-8 max-w-3xl mx-auto">
+                Embark on an extraordinary journey through mystical realms and discover hidden treasures in this immersive online adventure game.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-apple-blue hover:bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 pulse-animation">
+                    Start Your Quest
+                </button>
+                <button class="bg-white hover:bg-apple-gray6 text-apple-blue border border-apple-blue px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300">
+                    Watch Trailer
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Container -->
+    <section class="container mx-auto px-4 mb-16">
+        <div class="game-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div class="p-6 md:p-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Play Now</h2>
+                <p class="text-apple-gray mb-6">Experience the game directly in your browser - no downloads required!</p>
+                
+                <!-- Integrated Game Container -->
+                <div class="relative w-full" style="padding-bottom: 56.25%; /* 16:9 aspect ratio */">
+                    <div class="absolute top-0 left-0 w-full h-full rounded-2xl border-4 border-apple-gray5 overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
+                        <div class="game-wrapper-integrated">
+                            <div class="game-main-integrated">
+                                <div class="game-side-panels-integrated">
+                                    <div class="external-ui-integrated">
+                                        <div id="stats" class="ui-element-integrated">
+                                            <h3>📊 状态</h3>
+                                            <div>等级: <span id="playerLevel">1</span></div>
+                                            <div id="healthBar">
+                                                <div id="healthFill" style="width: 100%"></div>
+                                            </div>
+                                            <div>血量: <span id="playerHP">100</span>/100</div>
+                                            <div id="expBar">
+                                                <div id="expFill" style="width: 0%"></div>
+                                            </div>
+                                            <div>经验: <span id="playerEXP">0</span>/<span id="expToNext">100</span></div>
+                                            <div>分数: <span id="gameScore">0</span></div>
+                                            <div>时间: <span id="gameTime">0:00</span></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="external-ui-integrated">
+                                        <div id="weaponSlots" class="ui-element-integrated">
+                                            <h3>⚔️ 武器库</h3>
+                                            <div>武器:</div>
+                                            <div id="weaponContainer"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="game-container-integrated">
+                                    <canvas id="gameCanvas"></canvas>
+                                    
+                                    <div id="startScreen">
+                                        <div class="start-title">🧛 史诗冒险任务 🗡️</div>
+                                        <div class="start-subtitle">吸血鬼生存游戏</div>
+                                        <button class="start-button" onclick="startGame()">🚀 开始冒险</button>
+                                        <div style="margin-top: 15px; font-size: 14px; opacity: 0.7;">
+                                            按 <span style="color: #FFD700; font-weight: bold;">ENTER</span> 或点击按钮开始！
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="gameUI">
+                                        <div id="levelUpModal" class="ui-element-integrated">
+                                            <div class="slow-motion-indicator">⏰ 慢动作</div>
+                                            <h2>🎉 升级了！</h2>
+                                            <p>明智地选择你的升级:</p>
+                                            <div id="upgradeOptions" style="display: flex; flex-wrap: wrap; justify-content: center; max-width: 600px;"></div>
+                                            <p style="font-size: 12px; opacity: 0.7; margin-top: 15px;">🎮 游戏以慢动作继续 | 点击或按1-3键选择！</p>
+                                        </div>
+                                        
+                                        <div id="gameOver" class="ui-element-integrated">
+                                            <h2>游戏结束！</h2>
+                                            <p>最终分数: <span id="finalScore">0</span></p>
+                                            <p>生存时间: <span id="finalTime">0:00</span></p>
+                                            <button onclick="restartGame()">再玩一次</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="external-ui-integrated">
+                                    <div id="instructions" class="ui-element-integrated" style="display: none;">
+                                        <h3>🎮 控制</h3>
+                                        <div>WASD/方向键: 移动</div>
+                                        <div>武器自动攻击附近敌人</div>
+                                        <div>收集宝石获得经验</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Features -->
+    <section class="container mx-auto px-4 mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Game Features</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="glass-effect rounded-2xl p-6 text-center">
+                <div class="w-16 h-16 bg-apple-green rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">⚔️</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Epic Battles</h3>
+                <p class="text-apple-gray">Engage in thrilling combat with mythical creatures and powerful bosses using an advanced combat system.</p>
+            </div>
+            
+            <div class="glass-effect rounded-2xl p-6 text-center">
+                <div class="w-16 h-16 bg-apple-purple rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">🏰</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Vast Worlds</h3>
+                <p class="text-apple-gray">Explore stunning landscapes, from ancient forests to magical kingdoms, each with unique secrets to discover.</p>
+            </div>
+            
+            <div class="glass-effect rounded-2xl p-6 text-center">
+                <div class="w-16 h-16 bg-apple-orange rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">💎</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Treasure Hunting</h3>
+                <p class="text-apple-gray">Collect rare artifacts, magical weapons, and precious gems to enhance your character's abilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Overview -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">About Epic Adventure Quest</h2>
+                
+                <div class="prose prose-lg max-w-none text-apple-gray space-y-6">
+                    <p class="text-xl leading-relaxed">
+                        Epic Adventure Quest is a revolutionary browser-based MMORPG that combines classic adventure elements with modern gameplay mechanics. Set in the mystical realm of Aetheria, players embark on an epic journey to restore balance to a world torn apart by ancient magic.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800">Gameplay Overview</h3>
+                    <p>
+                        The game features an innovative real-time combat system where strategy and skill determine victory. Players can choose from five unique character classes, each with distinctive abilities and playstyles. Whether you prefer the brute force of a Warrior, the mystical powers of a Mage, or the stealth tactics of a Rogue, there's a perfect fit for every gaming preference.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800">Character Progression</h3>
+                    <p>
+                        Experience a deep character customization system with over 100 skills to master and countless equipment combinations. As you progress through the game, unlock powerful abilities, craft legendary weapons, and discover rare magical items that will aid you in your quest.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800">Multiplayer Features</h3>
+                    <p>
+                        Join forces with players from around the world in guild systems, participate in massive PvP battles, or tackle challenging dungeon raids that require teamwork and coordination. The game's social features ensure you'll never adventure alone.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800">Technical Specifications</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Platform:</strong> Browser-based (Chrome, Firefox, Safari, Edge)</li>
+                        <li><strong>Requirements:</strong> Minimum 4GB RAM, modern graphics card</li>
+                        <li><strong>Internet:</strong> Stable broadband connection required</li>
+                        <li><strong>Storage:</strong> No download required - plays directly in browser</li>
+                        <li><strong>Mobile Support:</strong> Optimized for tablets and smartphones</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="gradient-bg py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready for Adventure?</h2>
+            <p class="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+                Join millions of players worldwide and begin your legendary quest today. No registration required - jump straight into the action!
+            </p>
+            <button class="bg-white hover:bg-apple-gray6 text-apple-blue px-12 py-4 rounded-full text-xl font-bold transition-all duration-300 transform hover:scale-105">
+                Play Epic Adventure Quest Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Game</h4>
+                    <ul class="space-y-2 text-apple-gray2">
+                        <li><a href="#" class="hover:text-white transition-colors">How to Play</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Game Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Character Classes</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">System Requirements</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Community</h4>
+                    <ul class="space-y-2 text-apple-gray2">
+                        <li><a href="#" class="hover:text-white transition-colors">Forums</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Discord</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Reddit</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Facebook</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Support</h4>
+                    <ul class="space-y-2 text-apple-gray2">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Bug Reports</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-apple-gray2 hover:text-white transition-colors">
+                            <span class="text-2xl">📘</span>
+                        </a>
+                        <a href="#" class="text-apple-gray2 hover:text-white transition-colors">
+                            <span class="text-2xl">🐦</span>
+                        </a>
+                        <a href="#" class="text-apple-gray2 hover:text-white transition-colors">
+                            <span class="text-2xl">📷</span>
+                        </a>
+                        <a href="#" class="text-apple-gray2 hover:text-white transition-colors">
+                            <span class="text-2xl">🎬</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-apple-gray2">
+                <p>&copy; 2024 Epic Adventure Quest. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.game-card, .glass-effect');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+            
+            // Initialize game after DOM is loaded
+            initializeGame();
+        });
+
+        // ==================== 游戏逻辑开始 ====================
+        
+        function initializeGame() {
+            // Game Canvas Setup with responsive sizing
+            const canvas = document.getElementById('gameCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Set responsive canvas dimensions 
+            function initializeCanvas() {
+                const container = document.querySelector('.game-container-integrated');
+                if (!container) return;
+                
+                const containerRect = container.getBoundingClientRect();
+                
+                canvas.width = containerRect.width - 4; // Account for border
+                canvas.height = containerRect.height - 4;
+                
+                // Ensure minimum playable size
+                if (canvas.width < 280) canvas.width = 280;
+                if (canvas.height < 200) canvas.height = 200;
+            }
+            
+            // Initialize canvas
+            initializeCanvas();
+            
+            // Add resize listener
+            window.addEventListener('resize', initializeCanvas);
+            
+            // Game State
+            let gameStarted = false;
+            let gameRunning = false;
+            let gameTime = 0;
+            let lastTime = 0;
+            let score = 0;
+            
+            // Function for drawing detailed pixel-style sprites
+            function drawPixelSprite(x, y, size, color, type) {
+                if (type === 'player') {
+                    // Draw Van Helsing - detailed pixel hunter
+                    ctx.fillStyle = '#FFF8DC';  // Pale skin
+                    ctx.fillRect(x - size/3, y - size/2, size*2/3, size/3);
+                    
+                    ctx.fillStyle = '#8B4513';  // Brown leather coat
+                    ctx.fillRect(x - size/2, y - size/4, size, size*3/4);
+                    
+                    ctx.fillStyle = '#2F4F4F';  // Dark pants
+                    ctx.fillRect(x - size/3, y + size/6, size*2/3, size/3);
+                    
+                    ctx.fillStyle = '#FFD700';  // Golden cross pendant
+                    ctx.fillRect(x - size/8, y - size/8, size/4, size/8);
+                    
+                    ctx.fillStyle = '#654321';  // Brown hat
+                    ctx.fillRect(x - size/2, y - size/2, size, size/4);
+                    
+                    ctx.fillStyle = '#000000';  // Eyes
+                    ctx.fillRect(x - size/6, y - size/3, size/12, size/12);
+                    ctx.fillRect(x + size/12, y - size/3, size/12, size/12);
+                } else {
+                    // Draw enemy-specific detailed pixel sprites
+                    switch(type) {
+                        case 'skeleton':
+                            // 更详细的骷髅 - 头骨 (增加40%大小)
+                            const skeletonSize = size * 1.4;
+                            ctx.fillStyle = '#F5F5DC';
+                            ctx.fillRect(x - skeletonSize/2, y - skeletonSize/2, skeletonSize, skeletonSize/2);
+                            
+                            // 眼窝
+                            ctx.fillStyle = '#000000';
+                            ctx.fillRect(x - skeletonSize/3, y - skeletonSize/3, skeletonSize/6, skeletonSize/6);
+                            ctx.fillRect(x + skeletonSize/6, y - skeletonSize/3, skeletonSize/6, skeletonSize/6);
+                            
+                            // 鼻骨
+                            ctx.fillRect(x - skeletonSize/12, y - skeletonSize/6, skeletonSize/6, skeletonSize/8);
+                            
+                            // 牙齿
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.fillRect(x - skeletonSize/4, y - skeletonSize/12, skeletonSize/8, skeletonSize/6);
+                            ctx.fillRect(x - skeletonSize/8, y - skeletonSize/12, skeletonSize/8, skeletonSize/6);
+                            ctx.fillRect(x + skeletonSize/16, y - skeletonSize/12, skeletonSize/8, skeletonSize/6);
+                            ctx.fillRect(x + skeletonSize/4, y - skeletonSize/12, skeletonSize/8, skeletonSize/6);
+                            
+                            // 肋骨
+                            ctx.fillStyle = '#E6E6E6';
+                            ctx.fillRect(x - skeletonSize/3, y, skeletonSize*2/3, skeletonSize/8);
+                            ctx.fillRect(x - skeletonSize/4, y + skeletonSize/6, skeletonSize/2, skeletonSize/8);
+                            ctx.fillRect(x - skeletonSize/5, y + skeletonSize/3, skeletonSize*2/5, skeletonSize/8);
+                            
+                            // 骨骼手臂
+                            ctx.fillStyle = '#F5F5DC';
+                            ctx.fillRect(x - skeletonSize*2/3, y + skeletonSize/8, skeletonSize/4, skeletonSize/6);
+                            ctx.fillRect(x + skeletonSize*5/12, y + skeletonSize/8, skeletonSize/4, skeletonSize/6);
+                            
+                            // 骨骼腿部
+                            ctx.fillRect(x - skeletonSize/4, y + skeletonSize/2, skeletonSize/6, skeletonSize/3);
+                            ctx.fillRect(x + skeletonSize/12, y + skeletonSize/2, skeletonSize/6, skeletonSize/3);
+                            break;
+                            
+                        case 'zombie':
+                            // 僵尸头部 - 腐烂的绿色皮肤 (增加40%大小)
+                            const zombieSize = size * 1.4;
+                            ctx.fillStyle = '#9ACD32';
+                            ctx.fillRect(x - zombieSize/2, y - zombieSize/2, zombieSize, zombieSize/2);
+                            
+                            // 腐烂斑块
+                            ctx.fillStyle = '#6B8E23';
+                            ctx.fillRect(x - zombieSize/3, y - zombieSize/3, zombieSize/4, zombieSize/6);
+                            ctx.fillRect(x + zombieSize/6, y - zombieSize/4, zombieSize/5, zombieSize/8);
+                            
+                            // 血红眼睛
+                            ctx.fillStyle = '#FF0000';
+                            ctx.fillRect(x - zombieSize/4, y - zombieSize/3, zombieSize/8, zombieSize/8);
+                            ctx.fillRect(x + zombieSize/8, y - zombieSize/3, zombieSize/8, zombieSize/8);
+                            
+                            // 张开的嘴
+                            ctx.fillStyle = '#000000';
+                            ctx.fillRect(x - zombieSize/6, y - zombieSize/8, zombieSize/3, zombieSize/6);
+                            
+                            // 尖牙
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.fillRect(x - zombieSize/8, y - zombieSize/12, zombieSize/12, zombieSize/4);
+                            ctx.fillRect(x + zombieSize/24, y - zombieSize/12, zombieSize/12, zombieSize/4);
+                            
+                            // 破烂的衣服
+                            ctx.fillStyle = '#654321';
+                            ctx.fillRect(x - zombieSize/2, y, zombieSize, zombieSize/2);
+                            
+                            // 衣服破洞
+                            ctx.fillStyle = '#9ACD32';
+                            ctx.fillRect(x - zombieSize/4, y + zombieSize/8, zombieSize/6, zombieSize/6);
+                            ctx.fillRect(x + zombieSize/8, y + zombieSize/4, zombieSize/8, zombieSize/8);
+                            
+                            // 腐烂的手臂
+                            ctx.fillStyle = '#9ACD32';
+                            ctx.fillRect(x - zombieSize*2/3, y + zombieSize/6, zombieSize/3, zombieSize/4);
+                            ctx.fillRect(x + zombieSize/3, y + zombieSize/6, zombieSize/3, zombieSize/4);
+                            
+                            // 拖拉的腿
+                            ctx.fillRect(x - zombieSize/3, y + zombieSize/2, zombieSize/4, zombieSize/3);
+                            ctx.fillRect(x + zombieSize/12, y + zombieSize/2, zombieSize/4, zombieSize/3);
+                            break;
+                            
+                        case 'vampire':
+                            // 吸血鬼 - 苍白头部 (增加40%大小)
+                            const vampireSize = size * 1.4;
+                            ctx.fillStyle = '#FFF8DC';
+                            ctx.fillRect(x - vampireSize/3, y - vampireSize/2, vampireSize*2/3, vampireSize/2);
+                            
+                            // 黑发
+                            ctx.fillStyle = '#000000';
+                            ctx.fillRect(x - vampireSize/2, y - vampireSize/2, vampireSize, vampireSize/4);
+                            ctx.fillRect(x - vampireSize/3, y - vampireSize/3, vampireSize/8, vampireSize/3);
+                            ctx.fillRect(x + vampireSize/4, y - vampireSize/3, vampireSize/8, vampireSize/3);
+                            
+                            // 红眼
+                            ctx.fillStyle = '#DC143C';
+                            ctx.fillRect(x - vampireSize/5, y - vampireSize/3, vampireSize/10, vampireSize/10);
+                            ctx.fillRect(x + vampireSize/10, y - vampireSize/3, vampireSize/10, vampireSize/10);
+                            
+                            // 尖牙
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.fillRect(x - vampireSize/8, y - vampireSize/6, vampireSize/16, vampireSize/4);
+                            ctx.fillRect(x + vampireSize/16, y - vampireSize/6, vampireSize/16, vampireSize/4);
+                            
+                            // 优雅的红色斗篷
+                            ctx.fillStyle = '#8B0000';
+                            ctx.fillRect(x - vampireSize*2/3, y - vampireSize/4, vampireSize*4/3, vampireSize*3/4);
+                            
+                            // 斗篷内衬
+                            ctx.fillStyle = '#4B0000';
+                            ctx.fillRect(x - vampireSize/2, y - vampireSize/6, vampireSize, vampireSize/2);
+                            
+                            // 白色衬衫
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.fillRect(x - vampireSize/4, y, vampireSize/2, vampireSize/3);
+                            
+                            // 黑色领结
+                            ctx.fillStyle = '#000000';
+                            ctx.fillRect(x - vampireSize/8, y + vampireSize/12, vampireSize/4, vampireSize/12);
+                            
+                            // 苍白的手
+                            ctx.fillStyle = '#FFF8DC';
+                            ctx.fillRect(x - vampireSize/2, y + vampireSize/4, vampireSize/4, vampireSize/4);
+                            ctx.fillRect(x + vampireSize/4, y + vampireSize/4, vampireSize/4, vampireSize/4);
+                            break;
+                            
+                        case 'ghost':
+                            // 幽灵 - 半透明效果 (增加40%大小)
+                            const ghostSize = size * 1.4;
+                            ctx.globalAlpha = 0.7;
+                            
+                            // 主体 - 经典幽灵形状
+                            ctx.fillStyle = '#E6E6FA';
+                            ctx.fillRect(x - ghostSize/2, y - ghostSize/2, ghostSize, ghostSize/2);
+                            
+                            // 飘逸的下摆
+                            ctx.fillRect(x - ghostSize*2/3, y, ghostSize/3, ghostSize/3);
+                            ctx.fillRect(x - ghostSize/6, y, ghostSize/3, ghostSize/2);
+                            ctx.fillRect(x + ghostSize/6, y, ghostSize/3, ghostSize/3);
+                            ctx.fillRect(x + ghostSize/2, y, ghostSize/6, ghostSize/4);
+                            
+                            // 更多飘逸效果
+                            ctx.fillRect(x - ghostSize/2, y + ghostSize/3, ghostSize/4, ghostSize/6);
+                            ctx.fillRect(x + ghostSize/4, y + ghostSize/3, ghostSize/4, ghostSize/6);
+                            
+                            // 发光的蓝色眼睛
+                            ctx.fillStyle = '#00BFFF';
+                            ctx.fillRect(x - ghostSize/4, y - ghostSize/3, ghostSize/8, ghostSize/6);
+                            ctx.fillRect(x + ghostSize/8, y - ghostSize/3, ghostSize/8, ghostSize/6);
+                            
+                            // 眼睛发光效果
+                            ctx.globalAlpha = 0.3;
+                            ctx.fillRect(x - ghostSize/3, y - ghostSize/2, ghostSize/6, ghostSize/3);
+                            ctx.fillRect(x + ghostSize/6, y - ghostSize/2, ghostSize/6, ghostSize/3);
+                            
+                            // 悲伤的嘴
+                            ctx.globalAlpha = 0.7;
+                            ctx.fillStyle = '#9370DB';
+                            ctx.fillRect(x - ghostSize/8, y - ghostSize/8, ghostSize/4, ghostSize/12);
+                            
+                            ctx.globalAlpha = 1.0;
+                            break;
+                            
+                        case 'demon':
+                            // 恶魔 - 火红身体 (增加40%大小)
+                            const demonSize = size * 1.4;
+                            ctx.fillStyle = '#FF4500';
+                            ctx.fillRect(x - demonSize/2, y - demonSize/3, demonSize, demonSize*2/3);
+                            
+                            // 恶魔头部
+                            ctx.fillStyle = '#DC143C';
+                            ctx.fillRect(x - demonSize/3, y - demonSize/2, demonSize*2/3, demonSize/3);
+                            
+                            // 恶魔角
+                            ctx.fillStyle = '#800000';
+                            ctx.fillRect(x - demonSize/3, y - demonSize*2/3, demonSize/6, demonSize/3);
+                            ctx.fillRect(x + demonSize/6, y - demonSize*2/3, demonSize/6, demonSize/3);
+                            
+                            // 角的尖端
+                            ctx.fillRect(x - demonSize/4, y - demonSize*3/4, demonSize/12, demonSize/6);
+                            ctx.fillRect(x + demonSize/6, y - demonSize*3/4, demonSize/12, demonSize/6);
+                            
+                            // 燃烧的黄色眼睛
+                            ctx.fillStyle = '#FFFF00';
+                            ctx.fillRect(x - demonSize/5, y - demonSize/3, demonSize/10, demonSize/8);
+                            ctx.fillRect(x + demonSize/10, y - demonSize/3, demonSize/10, demonSize/8);
+                            
+                            // 邪恶的笑容
+                            ctx.fillStyle = '#000000';
+                            ctx.fillRect(x - demonSize/4, y - demonSize/6, demonSize/2, demonSize/12);
+                            
+                            // 尖牙
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.fillRect(x - demonSize/6, y - demonSize/8, demonSize/12, demonSize/6);
+                            ctx.fillRect(x + demonSize/12, y - demonSize/8, demonSize/12, demonSize/6);
+                            
+                            // 肌肉发达的手臂
+                            ctx.fillStyle = '#FF4500';
+                            ctx.fillRect(x - demonSize*3/4, y, demonSize/3, demonSize/2);
+                            ctx.fillRect(x + demonSize*5/12, y, demonSize/3, demonSize/2);
+                            
+                            // 金色爪子
+                            ctx.fillStyle = '#FFD700';
+                            ctx.fillRect(x - demonSize*3/4, y + demonSize/2, demonSize/8, demonSize/4);
+                            ctx.fillRect(x - demonSize*2/3, y + demonSize/2, demonSize/8, demonSize/3);
+                            ctx.fillRect(x - demonSize*7/12, y + demonSize/2, demonSize/8, demonSize/4);
+                            
+                            ctx.fillRect(x + demonSize*5/12, y + demonSize/2, demonSize/8, demonSize/4);
+                            ctx.fillRect(x + demonSize/2, y + demonSize/2, demonSize/8, demonSize/3);
+                            ctx.fillRect(x + demonSize*7/12, y + demonSize/2, demonSize/8, demonSize/4);
+                            
+                            // 火焰效果
+                            ctx.fillStyle = '#FF6347';
+                            ctx.fillRect(x - demonSize/6, y - demonSize*2/3, demonSize/12, demonSize/6);
+                            ctx.fillRect(x + demonSize/12, y - demonSize*2/3, demonSize/12, demonSize/6);
+                            ctx.fillRect(x - demonSize/12, y + demonSize/2, demonSize/6, demonSize/8);
+                            break;
+                            
+                        case 'boss':
+                            // 黑暗领主 - 威严的身形 (增加40%大小)
+                            const bossSize = size * 1.4;
+                            ctx.fillStyle = '#2F2F2F';
+                            ctx.fillRect(x - bossSize*2/3, y - bossSize/2, bossSize*4/3, bossSize);
+                            
+                            // 华丽的紫色斗篷
+                            ctx.fillStyle = '#4B0082';
+                            ctx.fillRect(x - bossSize, y - bossSize/3, bossSize*2, bossSize*4/3);
+                            
+                            // 斗篷边缘装饰
+                            ctx.fillStyle = '#8A2BE2';
+                            ctx.fillRect(x - bossSize, y - bossSize/3, bossSize*2, bossSize/8);
+                            ctx.fillRect(x - bossSize, y + bossSize, bossSize*2, bossSize/6);
+                            
+                            // 金色王冠
+                            ctx.fillStyle = '#FFD700';
+                            ctx.fillRect(x - bossSize/2, y - bossSize*2/3, bossSize, bossSize/6);
+                            
+                            // 王冠尖端
+                            ctx.fillRect(x - bossSize/3, y - bossSize*5/6, bossSize/8, bossSize/4);
+                            ctx.fillRect(x - bossSize/6, y - bossSize, bossSize/8, bossSize/3);
+                            ctx.fillRect(x, y - bossSize, bossSize/8, bossSize/3);
+                            ctx.fillRect(x + bossSize/6, y - bossSize*5/6, bossSize/8, bossSize/4);
+                            ctx.fillRect(x + bossSize/3, y - bossSize*5/6, bossSize/8, bossSize/4);
+                            
+                            // 宝石装饰
+                            ctx.fillStyle = '#FF0000';
+                            ctx.fillRect(x - bossSize/8, y - bossSize*3/4, bossSize/4, bossSize/8);
+                            
+                            // 苍白恐怖的脸
+                            ctx.fillStyle = '#F8F8FF';
+                            ctx.fillRect(x - bossSize/3, y - bossSize/2, bossSize*2/3, bossSize/3);
+                            
+                            // 深邃的红眼
+                            ctx.fillStyle = '#8B0000';
+                            ctx.fillRect(x - bossSize/4, y - bossSize/3, bossSize/8, bossSize/6);
+                            ctx.fillRect(x + bossSize/8, y - bossSize/3, bossSize/8, bossSize/6);
+                            
+                            // 眼中红光
+                            ctx.fillStyle = '#FF0000';
+                            ctx.fillRect(x - bossSize/5, y - bossSize/4, bossSize/12, bossSize/12);
+                            ctx.fillRect(x + bossSize/10, y - bossSize/4, bossSize/12, bossSize/12);
+                            
+                            // 邪恶微笑
+                            ctx.fillStyle = '#000000';
+                            ctx.fillRect(x - bossSize/4, y - bossSize/8, bossSize/2, bossSize/16);
+                            
+                            // 金色护甲细节
+                            ctx.fillStyle = '#DAA520';
+                            ctx.fillRect(x - bossSize/2, y, bossSize, bossSize/8);
+                            ctx.fillRect(x - bossSize/3, y + bossSize/4, bossSize*2/3, bossSize/8);
+                            
+                            // 权杖（如果有空间）
+                            if (bossSize > 15) {
+                                ctx.fillStyle = '#8B4513';
+                                ctx.fillRect(x + bossSize*2/3, y - bossSize/4, bossSize/8, bossSize*3/2);
+                                ctx.fillStyle = '#FFD700';
+                                ctx.fillRect(x + bossSize*2/3, y - bossSize/2, bossSize/4, bossSize/4);
+                            }
+                            break;
+                            
+                        default:
+                            ctx.fillStyle = color;
+                            ctx.beginPath();
+                            ctx.arc(x, y, size, 0, Math.PI * 2);
+                            ctx.fill();
+                    }
+                }
+            }
+            
+            // Camera system for infinite map
+            const camera = {
+                x: 0,
+                y: 0
+            };
+
+            // Player Object
+            const player = {
+                x: 0, // 世界坐标
+                y: 0,
+                size: 15,
+                speed: 150,
+                health: 100,
+                maxHealth: 100,
+                level: 1,
+                exp: 0,
+                expToNext: 100,
+                color: '#4CAF50'
+            };
+
+            // Obstacles (stones)
+            const obstacles = [];
+            
+            // Generate initial obstacles
+            function generateObstacles() {
+                obstacles.length = 0;
+                // Generate stones in a larger area around spawn, more sparse
+                for (let i = 0; i < 60; i++) { // 减少石头数量从150到60
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 1500 + 100; // 增加分布范围，距离出生点100-1600像素
+                    obstacles.push({
+                        x: Math.cos(angle) * distance,
+                        y: Math.sin(angle) * distance,
+                        size: 20, // 统一大小为20像素
+                        type: 'standard' // 统一类型
+                    });
+                }
+            }
+            
+            // Input Handling
+            const keys = {};
+            let upgradeOptions = [];
+            
+            document.addEventListener('keydown', (e) => {
+                keys[e.key.toLowerCase()] = true;
+                
+                // Handle start game with Enter key
+                if (!gameStarted && e.key === 'Enter') {
+                    startGame();
+                    return;
+                }
+                
+                // Handle upgrade selection with number keys
+                if (levelUpActive && upgradeOptions.length > 0) {
+                    const num = parseInt(e.key);
+                    if (num >= 1 && num <= upgradeOptions.length) {
+                        selectUpgrade(upgradeOptions[num - 1]);
+                    }
+                }
+            });
+            
+            document.addEventListener('keyup', (e) => keys[e.key.toLowerCase()] = false);
+            
+            // Weapon System
+            const weaponTypes = {
+                whip: {
+                    name: '魔法鞭',
+                    damage: 25,
+                    range: 80,
+                    cooldown: 500,
+                    icon: '🞭',
+                    description: '快速近战武器',
+                    synergy: ['garlic'],
+                    upgrade: () => ({ damage: 10, range: 10 })
+                },
+                fireball: {
+                    name: '火球术',
+                    damage: 40,
+                    range: 150,
+                    cooldown: 800,
+                    icon: '🔥',
+                    description: '远程火焰弹射',
+                    synergy: ['ice'],
+                    upgrade: () => ({ damage: 15, cooldown: -50 })
+                },
+                garlic: {
+                    name: '大蒜护盾',
+                    damage: 15,
+                    range: 60,
+                    cooldown: 200,
+                    icon: '🧄',
+                    description: '保护光环',
+                    synergy: ['whip'],
+                    upgrade: () => ({ damage: 8, range: 15 })
+                },
+                ice: {
+                    name: '寒冰尖刺',
+                    damage: 30,
+                    range: 120,
+                    cooldown: 600,
+                    icon: '❄️',
+                    description: '冰冻弹射',
+                    synergy: ['fireball'],
+                    upgrade: () => ({ damage: 12, range: 20 })
+                },
+                lightning: {
+                    name: '闪电箭',
+                    damage: 50,
+                    range: 200,
+                    cooldown: 1000,
+                    icon: '⚡',
+                    description: '连锁闪电攻击',
+                    synergy: ['cross'],
+                    upgrade: () => ({ damage: 20, cooldown: -100 })
+                },
+                cross: {
+                    name: '圣十字',
+                    damage: 35,
+                    range: 100,
+                    cooldown: 700,
+                    icon: '✞',
+                    description: '旋转十字武器',
+                    synergy: ['lightning'],
+                    upgrade: () => ({ damage: 15, range: 25 })
+                }
+            };
+            
+            const playerWeapons = [];
+            const projectiles = [];
+            
+            // Enemy System
+            const enemyTypes = {
+                '骷髅': {
+                    name: '骷髅',
+                    health: 30,
+                    speed: 50,
+                    damage: 10,
+                    exp: 5,
+                    color: '#F5F5DC',
+                    size: 12
+                },
+                '僵尸': {
+                    name: '僵尸',
+                    health: 60,
+                    speed: 30,
+                    damage: 15,
+                    exp: 8,
+                    color: '#8FBC8F',
+                    size: 14
+                },
+                '吸血鬼': {
+                    name: '吸血鬼',
+                    health: 40,
+                    speed: 80,
+                    damage: 20,
+                    exp: 12,
+                    color: '#8B0000',
+                    size: 13
+                },
+                '幽灵': {
+                    name: '幽灵',
+                    health: 25,
+                    speed: 90,
+                    damage: 8,
+                    exp: 10,
+                    color: '#E6E6FA',
+                    size: 11
+                },
+                '恶魔': {
+                    name: '恶魔',
+                    health: 100,
+                    speed: 60,
+                    damage: 25,
+                    exp: 20,
+                    color: '#FF4500',
+                    size: 16
+                },
+                '黑暗领主': {
+                    name: '黑暗领主',
+                    health: 300,
+                    speed: 40,
+                    damage: 40,
+                    exp: 50,
+                    color: '#4B0082',
+                    size: 20
+                }
+            };
+            
+            const enemies = [];
+            const gems = [];
+            
+            // Level up system
+            let levelUpActive = false;
+            let slowMotionFactor = 1.0;
+            
+            // Make functions globally accessible
+            window.startGame = startGame;
+            window.restartGame = restartGame;
+            window.selectUpgrade = selectUpgrade;
+            
+            // 启动游戏循环
+            requestAnimationFrame(gameLoop);
+            
+            // 绘制像素风草地背景
+            function drawPixelGrassBackground() {
+                const tileSize = 32; // 草地瓦片大小
+                const startX = Math.floor(camera.x / tileSize) * tileSize;
+                const startY = Math.floor(camera.y / tileSize) * tileSize;
+                const endX = startX + canvas.width + tileSize;
+                const endY = startY + canvas.height + tileSize;
+                
+                for (let x = startX; x < endX; x += tileSize) {
+                    for (let y = startY; y < endY; y += tileSize) {
+                        const screenX = x - camera.x;
+                        const screenY = y - camera.y;
+                        
+                        // 更平滑的草地颜色变化，减少边界感
+                        const grassVariation = (Math.sin(x * 0.05) * Math.cos(y * 0.05) + 1) * 0.5;
+                        const grassHue = grassVariation > 0.6 ? '#4CAF50' : '#45A049';
+                        
+                        ctx.fillStyle = grassHue;
+                        ctx.fillRect(screenX, screenY, tileSize, tileSize);
+                        
+                        // 使用更连续的随机种子，让纹理跨瓦片连接
+                        const hash = Math.floor(x/8) * 73 + Math.floor(y/8) * 37;
+                        const random = (hash % 1000) / 1000;
+                        
+                        // 添加草地细节纹理 - 减少频率，增加连续性
+                        ctx.fillStyle = '#5CBF60';
+                        if (random > 0.75) {
+                            // 小草点 - 位置基于更大区域
+                            const offsetX = (x % 16) + 5;
+                            const offsetY = (y % 16) + 5;
+                            ctx.fillRect(screenX + offsetX, screenY + offsetY, 3, 3);
+                            ctx.fillRect(screenX + offsetX + 10, screenY + offsetY + 7, 2, 2);
+                        }
+                        
+                        if (random > 0.85) {
+                            // 深色草地斑点 - 更自然的分布
+                            ctx.fillStyle = '#3E8E41';
+                            const offsetX = (x % 20) + 8;
+                            const offsetY = (y % 20) + 15;
+                            ctx.fillRect(screenX + offsetX, screenY + offsetY, 4, 2);
+                            ctx.fillRect(screenX + offsetX + 5, screenY + offsetY + 5, 3, 3);
+                        }
+                        
+                        if (random > 0.92) {
+                            // 小花点缀 - 更稀少，更自然
+                            const offsetX = (x % 24) + 12;
+                            const offsetY = (y % 24) + 10;
+                            ctx.fillStyle = '#FFD700';
+                            ctx.fillRect(screenX + offsetX, screenY + offsetY, 2, 2);
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.fillRect(screenX + offsetX + 6, screenY + offsetY + 8, 1, 1);
+                        }
+                    }
+                }
+            }
+            
+            // 绘制石头阻碍物
+            function drawStone(x, y, size, type) {
+                const baseColor = '#696969'; // 统一基础颜色
+                const lightColor = '#A9A9A9'; // 统一高光颜色
+                const darkColor = '#2F4F4F'; // 统一阴影颜色
+                
+                // 主体
+                ctx.fillStyle = baseColor;
+                ctx.fillRect(x - size/2, y - size/2, size, size);
+                
+                // 高光
+                ctx.fillStyle = lightColor;
+                ctx.fillRect(x - size/2, y - size/2, size/3, size/3);
+                ctx.fillRect(x - size/4, y - size/4, size/4, size/6);
+                
+                // 阴影
+                ctx.fillStyle = darkColor;
+                ctx.fillRect(x + size/4, y + size/4, size/4, size/4);
+                ctx.fillRect(x - size/6, y + size/3, size/3, size/6);
+                
+                // 边缘细节（统一添加）
+                ctx.fillStyle = '#4A4A4A';
+                ctx.fillRect(x - size/2, y + size/2 - 2, size, 2);
+                ctx.fillRect(x + size/2 - 2, y - size/2, 2, size);
+            }
+            
+            // 检查与石头的碰撞
+            function checkStoneCollision(newX, newY, playerSize) {
+                for (const obstacle of obstacles) {
+                    const dx = newX - obstacle.x;
+                    const dy = newY - obstacle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const minDistance = playerSize + obstacle.size/2;
+                    
+                    if (distance < minDistance) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            
+            // 动态生成更多石头
+            function generateMoreObstacles() {
+                const viewDistance = 1000;
+                const currentObstacles = obstacles.filter(obs => {
+                    const dx = obs.x - player.x;
+                    const dy = obs.y - player.y;
+                    return Math.sqrt(dx*dx + dy*dy) < viewDistance * 2;
+                });
+                
+                // 如果视野内石头太少，生成更多 (更稀疏的密度)
+                if (currentObstacles.length < 20) { // 减少密度从50到20
+                    for (let i = 0; i < 15; i++) { // 减少每次生成数量从30到15
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = Math.random() * viewDistance + viewDistance/2;
+                        // 增加最小距离间隔，避免石头太密集
+                        const minDistanceFromOthers = 80;
+                        const newX = player.x + Math.cos(angle) * distance;
+                        const newY = player.y + Math.sin(angle) * distance;
+                        
+                        // 检查与现有石头的距离
+                        let tooClose = false;
+                        for (const obs of obstacles) {
+                            const dx = newX - obs.x;
+                            const dy = newY - obs.y;
+                            if (Math.sqrt(dx*dx + dy*dy) < minDistanceFromOthers) {
+                                tooClose = true;
+                                break;
+                            }
+                        }
+                        
+                        if (!tooClose) {
+                            obstacles.push({
+                                x: newX,
+                                y: newY,
+                                size: 20, // 统一大小
+                                type: 'standard' // 统一类型
+                            });
+                        }
+                    }
+                }
+            }
+
+            function drawPreviewScene() {
+                // 绘制草地背景
+                drawPixelGrassBackground();
+                
+                // Draw a static preview of the game world
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                
+                // Draw Van Helsing in center
+                drawPixelSprite(centerX, centerY, 15, '#4CAF50', 'player');
+                
+                // Draw some decorative enemies around (static)
+                const enemyPositions = [
+                    {x: centerX - 100, y: centerY - 80, type: 'skeleton'},
+                    {x: centerX + 120, y: centerY - 60, type: 'zombie'},
+                    {x: centerX - 80, y: centerY + 100, type: 'vampire'},
+                    {x: centerX + 90, y: centerY + 90, type: 'ghost'},
+                    {x: centerX - 150, y: centerY + 20, type: 'demon'}
+                ];
+                
+                enemyPositions.forEach(pos => {
+                    if (pos.x > 0 && pos.x < canvas.width && pos.y > 0 && pos.y < canvas.height) {
+                        drawPixelSprite(pos.x, pos.y, 12, getEnemyColor(pos.type), pos.type);
+                    }
+                });
+                
+                // Draw some stones (统一大小)
+                drawStone(centerX - 80, centerY - 50, 20, 'standard');
+                drawStone(centerX + 100, centerY + 30, 20, 'standard');
+                drawStone(centerX - 30, centerY + 80, 20, 'standard');
+                
+                // Draw some gems
+                const gemPositions = [
+                    {x: centerX - 50, y: centerY - 30},
+                    {x: centerX + 30, y: centerY + 40},
+                    {x: centerX - 20, y: centerY + 60}
+                ];
+                
+                gemPositions.forEach(pos => {
+                    if (pos.x > 0 && pos.x < canvas.width && pos.y > 0 && pos.y < canvas.height) {
+                        ctx.fillStyle = '#FFD700';
+                        ctx.beginPath();
+                        ctx.arc(pos.x, pos.y, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                });
+                
+                // Add a subtle glow effect
+                ctx.strokeStyle = '#FFFFFF';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, 17, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+            
+            function getEnemyColor(type) {
+                const colors = {
+                    skeleton: '#F5F5DC',
+                    zombie: '#8FBC8F',
+                    vampire: '#8B0000',
+                    ghost: '#E6E6FA',
+                    demon: '#FF4500'
+                };
+                return colors[type] || '#FFFFFF';
+            }
+            
+            // 敌人生成函数
+            function spawnEnemy() {
+                const types = Object.keys(enemyTypes);
+                let enemyType;
+                
+                // 难度递增
+                const difficultyFactor = Math.floor(gameTime / 30);
+                if (difficultyFactor > 5 && Math.random() < 0.1) {
+                    enemyType = '黑暗领主';  // boss
+                } else if (difficultyFactor > 3 && Math.random() < 0.2) {
+                    enemyType = '恶魔';     // demon
+                } else {
+                    // 从前4种基础敌人中随机选择
+                    const basicTypes = ['骷髅', '僵尸', '吸血鬼', '幽灵'];
+                    enemyType = basicTypes[Math.floor(Math.random() * basicTypes.length)];
+                }
+                
+                const template = enemyTypes[enemyType];
+                const angle = Math.random() * Math.PI * 2;
+                const spawnDistance = 400;
+                
+                const enemy = {
+                    ...template,
+                    x: player.x + Math.cos(angle) * spawnDistance,
+                    y: player.y + Math.sin(angle) * spawnDistance,
+                    maxHealth: template.health,
+                    lastDamage: 0
+                };
+                
+                enemies.push(enemy);
+            }
+            
+            // 武器功能
+            function addWeapon(weaponType) {
+                if (playerWeapons.find(w => w.type === weaponType)) {
+                    // 升级现有武器
+                    const weapon = playerWeapons.find(w => w.type === weaponType);
+                    const upgrade = weaponTypes[weaponType].upgrade();
+                    weapon.damage += upgrade.damage || 0;
+                    weapon.range += upgrade.range || 0;
+                    if (upgrade.cooldown) weapon.cooldown += upgrade.cooldown;
+                    weapon.level++;
+                } else {
+                    // 添加新武器
+                    const weaponData = weaponTypes[weaponType];
+                    playerWeapons.push({
+                        type: weaponType,
+                        ...weaponData,
+                        level: 1,
+                        lastAttack: 0
+                    });
+                }
+                updateWeaponDisplay();
+            }
+            
+            function updateWeaponDisplay() {
+                const container = document.getElementById('weaponContainer');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                playerWeapons.forEach(weapon => {
+                    const slot = document.createElement('div');
+                    slot.className = 'weapon-slot active';
+                    slot.innerHTML = `${weapon.icon}<div style="font-size:10px;">${weapon.level}</div>`;
+                    slot.title = `${weapon.name} Lv.${weapon.level}`;
+                    container.appendChild(slot);
+                });
+            }
+            
+            function useWeapons(currentTime) {
+                playerWeapons.forEach(weapon => {
+                    if (currentTime - weapon.lastAttack > weapon.cooldown) {
+                        // 寻找最近的敌人
+                        let closestEnemy = null;
+                        let closestDistance = weapon.range;
+                        
+                        enemies.forEach(enemy => {
+                            const distance = Math.sqrt(
+                                Math.pow(enemy.x - player.x, 2) + 
+                                Math.pow(enemy.y - player.y, 2)
+                            );
+                            if (distance < closestDistance) {
+                                closestEnemy = enemy;
+                                closestDistance = distance;
+                            }
+                        });
+                        
+                        if (closestEnemy) {
+                            if (weapon.type === 'garlic') {
+                                // 大蒜是范围伤害
+                                enemies.forEach(enemy => {
+                                    const distance = Math.sqrt(
+                                        Math.pow(enemy.x - player.x, 2) + 
+                                        Math.pow(enemy.y - player.y, 2)
+                                    );
+                                    if (distance < weapon.range) {
+                                        damageEnemy(enemy, weapon.damage);
+                                    }
+                                });
+                            } else {
+                                // 创建投射物
+                                const angle = Math.atan2(closestEnemy.y - player.y, closestEnemy.x - player.x);
+                                projectiles.push({
+                                    x: player.x,
+                                    y: player.y,
+                                    vx: Math.cos(angle) * 300,
+                                    vy: Math.sin(angle) * 300,
+                                    damage: weapon.damage,
+                                    type: weapon.type,
+                                    range: weapon.range,
+                                    traveled: 0
+                                });
+                            }
+                            
+                            weapon.lastAttack = currentTime;
+                        }
+                    }
+                });
+            }
+            
+            function damageEnemy(enemy, damage) {
+                enemy.health -= damage;
+                enemy.lastDamage = Date.now();
+                
+                if (enemy.health <= 0) {
+                    // 敌人死亡，掉落宝石
+                    gems.push({
+                        x: enemy.x,
+                        y: enemy.y,
+                        exp: enemy.exp,
+                        collected: false
+                    });
+                    
+                    score += enemy.exp;
+                    enemies.splice(enemies.indexOf(enemy), 1);
+                }
+            }
+            
+            function levelUp() {
+                levelUpActive = true;
+                slowMotionFactor = 0.1;
+                const modal = document.getElementById('levelUpModal');
+                const optionsContainer = document.getElementById('upgradeOptions');
+                
+                if (modal) modal.style.display = 'block';
+                
+                // 生成升级选项
+                const availableWeapons = Object.keys(weaponTypes).filter(type => 
+                    !playerWeapons.find(w => w.type === type) || 
+                    playerWeapons.find(w => w.type === type).level < 5
+                );
+                
+                const options = [];
+                
+                // 添加武器选项
+                for (let i = 0; i < Math.min(3, availableWeapons.length); i++) {
+                    const weaponType = availableWeapons[Math.floor(Math.random() * availableWeapons.length)];
+                    const weapon = weaponTypes[weaponType];
+                    const existing = playerWeapons.find(w => w.type === weaponType);
+                    
+                    options.push({
+                        type: 'weapon',
+                        weaponType: weaponType,
+                        title: existing ? `升级 ${weapon.name}` : `新 ${weapon.name}`,
+                        description: weapon.description
+                    });
+                    
+                    availableWeapons.splice(availableWeapons.indexOf(weaponType), 1);
+                }
+                
+                // 添加属性选项
+                options.push({
+                    type: 'stat',
+                    stat: 'health',
+                    title: '生命强化',
+                    description: '+20 最大生命值，完全恢复'
+                });
+                
+                options.push({
+                    type: 'stat',
+                    stat: 'speed',
+                    title: '速度强化',
+                    description: '+10% 移动速度'
+                });
+                
+                // 随机排序并取3个选项
+                upgradeOptions = options.sort(() => 0.5 - Math.random()).slice(0, 3);
+                
+                if (optionsContainer) {
+                    optionsContainer.innerHTML = '';
+                    upgradeOptions.forEach((option, index) => {
+                        const optionElement = document.createElement('div');
+                        optionElement.className = 'upgrade-option';
+                        
+                        let optionHTML = '';
+                        if (option.type === 'weapon') {
+                            const weapon = weaponTypes[option.weaponType];
+                            const existing = playerWeapons.find(w => w.type === option.weaponType);
+                            const currentLevel = existing ? existing.level : 0;
+                            const nextLevel = currentLevel + 1;
+                            
+                            optionHTML = `
+                                <div style="position: absolute; top: 5px; right: 8px; background: #ffcc00; color: black; border-radius: 50%; width: 20px; height: 20px; text-align: center; line-height: 20px; font-size: 12px; font-weight: bold;">${index + 1}</div>
+                                <h3>${weapon.icon} ${option.title}</h3>
+                                <p>${option.description}</p>
+                                <div style="font-size: 12px; opacity: 0.8; margin-top: 8px;">
+                                    ${existing ? `等级 ${currentLevel} → ${nextLevel}` : '新武器！'}
+                                </div>
+                            `;
+                        } else {
+                            const statIcons = {
+                                'health': '❤️',
+                                'speed': '💨'
+                            };
+                            optionHTML = `
+                                <div style="position: absolute; top: 5px; right: 8px; background: #ffcc00; color: black; border-radius: 50%; width: 20px; height: 20px; text-align: center; line-height: 20px; font-size: 12px; font-weight: bold;">${index + 1}</div>
+                                <h3>${statIcons[option.stat] || '⭐'} ${option.title}</h3>
+                                <p>${option.description}</p>
+                                <div style="font-size: 12px; opacity: 0.8; margin-top: 8px;">
+                                    永久升级
+                                </div>
+                            `;
+                        }
+                        
+                        optionElement.innerHTML = optionHTML;
+                        optionElement.onclick = () => selectUpgrade(option);
+                        optionsContainer.appendChild(optionElement);
+                    });
+                }
+            }
+            
+            function selectUpgrade(option) {
+                if (option.type === 'weapon') {
+                    addWeapon(option.weaponType);
+                } else if (option.type === 'stat') {
+                    if (option.stat === 'health') {
+                        player.maxHealth += 20;
+                        player.health = player.maxHealth;
+                    } else if (option.stat === 'speed') {
+                        player.speed *= 1.1;
+                    }
+                }
+                
+                // 平滑过渡回正常速度
+                const modal = document.getElementById('levelUpModal');
+                if (modal) modal.style.display = 'none';
+                levelUpActive = false;
+                upgradeOptions = [];
+                
+                // 逐渐回到正常速度
+                const resumeInterval = setInterval(() => {
+                    slowMotionFactor += 0.15;
+                    if (slowMotionFactor >= 1.0) {
+                        slowMotionFactor = 1.0;
+                        clearInterval(resumeInterval);
+                    }
+                }, 50);
+            }
+            
+            // 完整的游戏循环
+            function gameLoop(currentTime) {
+                if (!gameStarted) {
+                    // 显示开始屏幕
+                    ctx.fillStyle = '#2c1810';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    drawPreviewScene();
+                    
+                    requestAnimationFrame(gameLoop);
+                    return;
+                }
+                
+                if (!gameRunning) {
+                    requestAnimationFrame(gameLoop);
+                    return;
+                }
+                
+                const rawDeltaTime = (currentTime - lastTime) / 1000;
+                const deltaTime = rawDeltaTime * slowMotionFactor;
+                lastTime = currentTime;
+                gameTime += deltaTime;
+                
+                // 更新游戏时间显示
+                const minutes = Math.floor(gameTime / 60);
+                const seconds = Math.floor(gameTime % 60);
+                const timeElement = document.getElementById('gameTime');
+                if (timeElement) {
+                    timeElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                }
+                
+                // 玩家移动
+                let moveX = 0, moveY = 0;
+                if (keys['w'] || keys['arrowup']) moveY -= 1;
+                if (keys['s'] || keys['arrowdown']) moveY += 1;
+                if (keys['a'] || keys['arrowleft']) moveX -= 1;
+                if (keys['d'] || keys['arrowright']) moveX += 1;
+                
+                if (moveX !== 0 || moveY !== 0) {
+                    const magnitude = Math.sqrt(moveX * moveX + moveY * moveY);
+                    const speed = player.speed * deltaTime;
+                    const newX = player.x + (moveX / magnitude) * speed;
+                    const newY = player.y + (moveY / magnitude) * speed;
+                    
+                    // 检查与石头的碰撞
+                    if (!checkStoneCollision(newX, newY, player.size)) {
+                        player.x = newX;
+                        player.y = newY;
+                    } else {
+                        // 尝试只在X轴上移动
+                        if (!checkStoneCollision(newX, player.y, player.size)) {
+                            player.x = newX;
+                        }
+                        // 尝试只在Y轴上移动
+                        else if (!checkStoneCollision(player.x, newY, player.size)) {
+                            player.y = newY;
+                        }
+                    }
+                    
+                    // 更新相机跟随玩家
+                    camera.x = player.x - canvas.width / 2;
+                    camera.y = player.y - canvas.height / 2;
+                    
+                    // 动态生成更多石头
+                    generateMoreObstacles();
+                }
+                
+                // 生成敌人
+                if (Math.random() < 0.02 + gameTime * 0.001) {
+                    spawnEnemy();
+                }
+                
+                // 更新武器
+                useWeapons(currentTime);
+                
+                // 更新投射物
+                projectiles.forEach((projectile, index) => {
+                    projectile.x += projectile.vx * deltaTime;
+                    projectile.y += projectile.vy * deltaTime;
+                    projectile.traveled += Math.sqrt(projectile.vx * projectile.vx + projectile.vy * projectile.vy) * deltaTime;
+                    
+                    // 检查与敌人的碰撞
+                    enemies.forEach(enemy => {
+                        const distance = Math.sqrt(
+                            Math.pow(enemy.x - projectile.x, 2) + 
+                            Math.pow(enemy.y - projectile.y, 2)
+                        );
+                        if (distance < enemy.size + 5) {
+                            damageEnemy(enemy, projectile.damage);
+                            projectiles.splice(index, 1);
+                        }
+                    });
+                    
+                    // 移除超出范围的投射物
+                    if (projectile.traveled > projectile.range) {
+                        projectiles.splice(index, 1);
+                    }
+                });
+                
+                // 更新敌人
+                enemies.forEach(enemy => {
+                    const angle = Math.atan2(player.y - enemy.y, player.x - enemy.x);
+                    enemy.x += Math.cos(angle) * enemy.speed * deltaTime;
+                    enemy.y += Math.sin(angle) * enemy.speed * deltaTime;
+                    
+                    // 检查与玩家的碰撞
+                    const distance = Math.sqrt(
+                        Math.pow(player.x - enemy.x, 2) + 
+                        Math.pow(player.y - enemy.y, 2)
+                    );
+                    if (distance < player.size + enemy.size) {
+                        player.health -= enemy.damage * deltaTime;
+                        if (player.health <= 0) {
+                            gameOver();
+                            return;
+                        }
+                    }
+                });
+                
+                // 更新宝石
+                gems.forEach((gem, index) => {
+                    const distance = Math.sqrt(
+                        Math.pow(player.x - gem.x, 2) + 
+                        Math.pow(player.y - gem.y, 2)
+                    );
+                    if (distance < 30) {
+                        player.exp += gem.exp;
+                        gems.splice(index, 1);
+                        
+                        // 检查升级
+                        if (player.exp >= player.expToNext) {
+                            player.level++;
+                            player.exp -= player.expToNext;
+                            player.expToNext = Math.floor(player.expToNext * 1.2);
+                            levelUp();
+                        }
+                    }
+                });
+                
+                // 渲染
+                render();
+                
+                // 更新UI
+                updateUI();
+                
+                requestAnimationFrame(gameLoop);
+            }
+            
+            function render() {
+                // 绘制像素风草地背景
+                drawPixelGrassBackground();
+                
+                // 绘制石头阻碍物（只显示屏幕范围内的）
+                obstacles.forEach(obstacle => {
+                    const screenX = obstacle.x - camera.x;
+                    const screenY = obstacle.y - camera.y;
+                    
+                    // 只渲染屏幕范围内的石头
+                    if (screenX > -50 && screenX < canvas.width + 50 && 
+                        screenY > -50 && screenY < canvas.height + 50) {
+                        drawStone(screenX, screenY, obstacle.size, obstacle.type);
+                    }
+                });
+                
+                // 画宝石（转换为屏幕坐标）
+                gems.forEach(gem => {
+                    const screenX = gem.x - camera.x;
+                    const screenY = gem.y - camera.y;
+                    
+                    if (screenX > -20 && screenX < canvas.width + 20 && 
+                        screenY > -20 && screenY < canvas.height + 20) {
+                        ctx.fillStyle = '#FFD700';
+                        ctx.beginPath();
+                        ctx.arc(screenX, screenY, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                        
+                        // 发光效果
+                        ctx.shadowColor = '#FFD700';
+                        ctx.shadowBlur = 10;
+                        ctx.beginPath();
+                        ctx.arc(screenX, screenY, 6, 0, Math.PI * 2);
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
+                    }
+                });
+                
+                // 画敌人（转换为屏幕坐标）
+                enemies.forEach(enemy => {
+                    const screenX = enemy.x - camera.x;
+                    const screenY = enemy.y - camera.y;
+                    
+                    if (screenX > -50 && screenX < canvas.width + 50 && 
+                        screenY > -50 && screenY < canvas.height + 50) {
+                        // 正确的中文到英文类型映射
+                        const typeMapping = {
+                            '骷髅': 'skeleton',
+                            '僵尸': 'zombie', 
+                            '吸血鬼': 'vampire',
+                            '幽灵': 'ghost',
+                            '恶魔': 'demon',
+                            '黑暗领主': 'boss'
+                        };
+                        const spriteType = typeMapping[enemy.name] || 'skeleton';
+                        
+                        // 直接画像素精灵
+                        if (Date.now() - enemy.lastDamage < 200) {
+                            drawPixelSprite(screenX, screenY, enemy.size, '#FFFFFF', spriteType);
+                        } else {
+                            drawPixelSprite(screenX, screenY, enemy.size, enemy.color, spriteType);
+                        }
+                        
+                        // 血条
+                        if (enemy.health < enemy.maxHealth) {
+                            const barWidth = enemy.size * 2;
+                            const barHeight = 4;
+                            const healthPercent = enemy.health / enemy.maxHealth;
+                            
+                            ctx.fillStyle = '#FF0000';
+                            ctx.fillRect(screenX - barWidth/2, screenY - enemy.size - 8, barWidth, barHeight);
+                            ctx.fillStyle = '#00FF00';
+                            ctx.fillRect(screenX - barWidth/2, screenY - enemy.size - 8, barWidth * healthPercent, barHeight);
+                        }
+                    }
+                });
+                
+                // 画投射物（转换为屏幕坐标）
+                projectiles.forEach(projectile => {
+                    const screenX = projectile.x - camera.x;
+                    const screenY = projectile.y - camera.y;
+                    
+                    if (screenX > -20 && screenX < canvas.width + 20 && 
+                        screenY > -20 && screenY < canvas.height + 20) {
+                        ctx.fillStyle = getProjectileColor(projectile.type);
+                        ctx.beginPath();
+                        ctx.arc(screenX, screenY, 3, 0, Math.PI * 2);
+                        ctx.fill();
+                        
+                        // 发光效果
+                        ctx.shadowColor = getProjectileColor(projectile.type);
+                        ctx.shadowBlur = 5;
+                        ctx.beginPath();
+                        ctx.arc(screenX, screenY, 5, 0, Math.PI * 2);
+                        ctx.stroke();
+                        ctx.shadowBlur = 0;
+                    }
+                });
+                
+                // 画玩家（始终在屏幕中心）
+                const playerScreenX = player.x - camera.x;
+                const playerScreenY = player.y - camera.y;
+                drawPixelSprite(playerScreenX, playerScreenY, player.size, player.color, 'player');
+                
+                // 玩家轮廓
+                ctx.strokeStyle = '#FFFFFF';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(playerScreenX, playerScreenY, player.size + 2, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+            
+            function getProjectileColor(weaponType) {
+                const colors = {
+                    whip: '#8B4513',
+                    fireball: '#FF4500',
+                    garlic: '#ADFF2F',
+                    ice: '#87CEEB',
+                    lightning: '#FFFF00',
+                    cross: '#FFD700'
+                };
+                return colors[weaponType] || '#FFFFFF';
+            }
+            
+            function updateUI() {
+                const elements = {
+                    playerLevel: document.getElementById('playerLevel'),
+                    playerHP: document.getElementById('playerHP'),
+                    playerEXP: document.getElementById('playerEXP'),
+                    expToNext: document.getElementById('expToNext'),
+                    gameScore: document.getElementById('gameScore'),
+                    healthFill: document.getElementById('healthFill'),
+                    expFill: document.getElementById('expFill')
+                };
+                
+                if (elements.playerLevel) elements.playerLevel.textContent = player.level;
+                if (elements.playerHP) elements.playerHP.textContent = Math.ceil(player.health);
+                if (elements.playerEXP) elements.playerEXP.textContent = player.exp;
+                if (elements.expToNext) elements.expToNext.textContent = player.expToNext;
+                if (elements.gameScore) elements.gameScore.textContent = score;
+                
+                // 更新血条
+                const healthPercent = (player.health / player.maxHealth) * 100;
+                const expPercent = (player.exp / player.expToNext) * 100;
+                
+                if (elements.healthFill) elements.healthFill.style.width = healthPercent + '%';
+                if (elements.expFill) elements.expFill.style.width = expPercent + '%';
+            }
+            
+            function gameOver() {
+                gameRunning = false;
+                const gameOverElement = document.getElementById('gameOver');
+                const finalScoreElement = document.getElementById('finalScore');
+                const finalTimeElement = document.getElementById('finalTime');
+                
+                if (finalScoreElement) finalScoreElement.textContent = score;
+                
+                const minutes = Math.floor(gameTime / 60);
+                const seconds = Math.floor(gameTime % 60);
+                if (finalTimeElement) finalTimeElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (gameOverElement) gameOverElement.style.display = 'block';
+            }
+            
+            function startGame() {
+                gameStarted = true;
+                gameRunning = true;
+                
+                // 隐藏开始屏幕
+                const startScreenElement = document.getElementById('startScreen');
+                if (startScreenElement) startScreenElement.style.display = 'none';
+                
+                // 显示游戏说明
+                const instructionsElement = document.getElementById('instructions');
+                if (instructionsElement) instructionsElement.style.display = 'block';
+                
+                // 重置游戏状态
+                gameTime = 0;
+                score = 0;
+                lastTime = performance.now();
+                
+                // 重置玩家位置到世界原点
+                player.x = 0;
+                player.y = 0;
+                player.health = 100;
+                player.maxHealth = 100;
+                player.level = 1;
+                player.exp = 0;
+                player.expToNext = 100;
+                player.speed = 150;
+                
+                // 重置相机
+                camera.x = -canvas.width / 2;
+                camera.y = -canvas.height / 2;
+                
+                // 生成初始石头阻碍物
+                generateObstacles();
+                
+                // 清空数组
+                enemies.length = 0;
+                gems.length = 0;
+                projectiles.length = 0;
+                playerWeapons.length = 0;
+                
+                // 添加起始武器
+                addWeapon('whip');
+                updateWeaponDisplay();
+                
+                // 重置升级系统
+                levelUpActive = false;
+                slowMotionFactor = 1.0;
+                upgradeOptions = [];
+            }
+            
+            function restartGame() {
+                // 重置到开始屏幕
+                gameStarted = false;
+                gameRunning = false;
+                
+                // 显示开始屏幕
+                const startScreenElement = document.getElementById('startScreen');
+                if (startScreenElement) startScreenElement.style.display = 'flex';
+                
+                // 隐藏游戏说明和游戏结束屏幕
+                const instructionsElement = document.getElementById('instructions');
+                const gameOverElement = document.getElementById('gameOver');
+                if (instructionsElement) instructionsElement.style.display = 'none';
+                if (gameOverElement) gameOverElement.style.display = 'none';
+                
+                // 重置游戏状态
+                gameTime = 0;
+                score = 0;
+                
+                // 重置玩家位置到世界原点
+                player.x = 0;
+                player.y = 0;
+                player.health = 100;
+                player.maxHealth = 100;
+                player.level = 1;
+                player.exp = 0;
+                player.expToNext = 100;
+                player.speed = 150;
+                
+                // 重置相机
+                camera.x = -canvas.width / 2;
+                camera.y = -canvas.height / 2;
+                
+                // 清空数组
+                enemies.length = 0;
+                gems.length = 0;
+                projectiles.length = 0;
+                playerWeapons.length = 0;
+                obstacles.length = 0;
+                
+                // 重置升级系统
+                levelUpActive = false;
+                slowMotionFactor = 1.0;
+                upgradeOptions = [];
+            }
+        }
+    </script>
+</body>
+</html>
